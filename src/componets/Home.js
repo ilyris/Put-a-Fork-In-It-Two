@@ -1,11 +1,12 @@
 
+import React, {useState} from "react";
 import styled from "styled-components";
 import SearchBox from "./SearchBox";
 import Recipe from "./Recipe";
-import React, { useState} from "react";
 
 const Home = () => {
 
+  // const enterPress = useKeyPress('Enter');
   const api_Key = process.env.REACT_APP_API_KEY;
   const api_Id = process.env.REACT_APP_API_ID;
 
@@ -20,14 +21,19 @@ const Home = () => {
     setRecipes(data.hits);
   };
 
-  const searchChange = event => {
-    setSearchField(event.target.value);
-  };
+  const searchChange = event => setSearchField(event.target.value);
+
+  const handleKeyPress = event => {
+    if(event.key === 'Enter') {
+      return fetchApiCall();
+    }
+  }
 
   const submitUsersRecipe = event => {
     event.preventDefault();
-    return fetchApiCall();
+    fetchApiCall();
   };
+
 
   return(
     <AppWrapper>
@@ -35,6 +41,7 @@ const Home = () => {
       <SearchBox
         searchChange={searchChange}
         submitUsersRecipe={submitUsersRecipe}
+        handleKeyPress={handleKeyPress}
       />
       <RecipeWrapper>
         {recipes.map(recipe => {

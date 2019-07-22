@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const SearchBox = ({submitUsersRecipe, searchChange}) => {
+const SearchBox = ({submitUsersRecipe, searchChange, handleKeyPress}) => {
     return(
         <SearchBoxWrapper>
-            <InputSearchField type="search" placeholder="search recipe" onChange={searchChange}></InputSearchField>
+            <InputSearchField type="search" placeholder="search recipe" onChange={searchChange} onKeyPress={handleKeyPress}></InputSearchField>
             <SubmitButton onClick={submitUsersRecipe}>Search</SubmitButton>
         </SearchBoxWrapper>
 
